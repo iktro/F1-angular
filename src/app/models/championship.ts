@@ -1,27 +1,27 @@
+import { Constructor } from "./constructor";
 import { Driver } from "./driver";
-import { Race } from "./race";
 
 export class Championship{
   year: number
-  pilot: Driver
-  races: Race[]
+  driver: Driver | undefined
+  Constructor: Constructor
   points: number
-  bestFinish: string
-  bestQualifying: string
+  wins: number
+  position: number
 
   constructor(
     year: number,
-    pilot: Driver,
-    races: Race[],
+    driver: Driver | undefined,
     points: number,
-    bestFinish: string,
-    bestQualifying: string,
+    wins: number,
+    Constructor: Constructor,
+    position: number
   ){
     this.year = year
-    this.pilot = pilot
-    this.races = races
+    this.driver = driver
+    this.Constructor = Constructor
     this.points = points
-    this.bestFinish = bestFinish
-    this.bestQualifying = bestQualifying
+    this.wins = wins
+    this.position = position
   }
 }

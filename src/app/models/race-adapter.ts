@@ -1,7 +1,6 @@
 import { Race } from "./race";
 import { Injectable } from "@angular/core";
 import { ModelAdapter } from "../contracts";
-import { Driver } from "./driver";
 
 @Injectable({
   providedIn: 'root'

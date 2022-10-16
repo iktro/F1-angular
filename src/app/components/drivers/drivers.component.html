@@ -1,12 +1,16 @@
 
-<div>
-  <a *ngFor="let season of seasons" href="drivers/{{season.year}}">
-    {{season.year}}
-  </a>
+<div class="container text-center mt-1">
+  <button class="btn btn-outline-danger" *ngFor="let season of selectedContent" (click)="setSelectedYear(season.year)" clickable>
+    {{season?.year}}
+  </button>
+
+  <div class="d-flex justify-content-center mt-1">
+    <ngb-pagination [collectionSize]=seasonsNumber [(page)]="page" [boundaryLinks]="true"></ngb-pagination>
+  </div>
 </div>
 
 <div class="container text-center">
-
+  <h5> Season : {{selectedYear}}</h5>
   <table class="table table-striped table-hover col-md-8">
     <tr>
       <th scope="col"> Code </th>
@@ -15,6 +19,7 @@
       <th> Nationality </th>
       <th> Date Of Birth </th>
     </tr>
+    <tbody class="table-group-divider">
     <tr *ngFor="let driver of drivers">
       <td> {{ driver?.code }}  </td>
       <td> {{ driver?.permanentNumber }}  </td>
@@ -22,5 +27,6 @@
       <td> {{ driver?.nationality }}  </td>
       <td> {{ driver?.dateOfBirth }}  </td>
     </tr>
+  </tbody>
   </table>
 </div>

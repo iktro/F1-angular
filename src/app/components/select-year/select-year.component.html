@@ -1,0 +1,10 @@
+<div class="container text-center mt-1">
+  <button class="btn btn-outline-danger" *ngFor="let championship of selectedContent" (click)="setSelectedYear(championship.year)" clickable>
+    {{championship?.year}}
+  </button>
+
+  <div class="d-flex justify-content-center mt-1">
+    <ngb-pagination [collectionSize]=seasonsNumber [(page)]="page" [boundaryLinks]="true"></ngb-pagination>
+  </div>
+  <h5> Season : {{selectedYear}}</h5>
+</div>

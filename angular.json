@@ -107,5 +107,7 @@
       }
     }
   },
-  "defaultProject": "formulaOne"
+  "cli": {
+    "analytics": "ad66be3c-7903-49ea-8504-761d356911a2"
+  }
 }

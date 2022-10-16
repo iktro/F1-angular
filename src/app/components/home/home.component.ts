@@ -18,7 +18,6 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.racesService.getLastRacesResults().subscribe(
       raceResult => {
-        console.log(this.raceAdapter.adapt(raceResult))
         this.raceResult = this.raceAdapter.adapt(raceResult)
       }
     );
