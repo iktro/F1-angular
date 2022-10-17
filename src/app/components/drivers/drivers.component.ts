@@ -5,6 +5,8 @@ import { Season } from 'src/app/models/season';
 import { SeasonsAdapter } from 'src/app/models/seasons-adapter';
 import { DriversService } from 'src/app/services/drivers.service';
 import { SeasonsService } from 'src/app/services/seasons.service';
+import { SelectYearService } from 'src/app/services/select-year.service';
+import { SelectYearComponent } from '../select-year/select-year.component';
 
 @Component({
   selector: 'app-drivers',
@@ -15,44 +17,30 @@ export class DriversComponent implements OnInit{
 
   drivers?: Driver[]
   seasons?: Season[]
-  selectedYear?: string
+  selectedYear: number = new Date().getFullYear()
   page = 1
   seasonsNumber = 0
 
   constructor(
     private driversService: DriversService, private driverAdapter: DriverAdapter,
-    private seasonService: SeasonsService, private seasonsAdapter: SeasonsAdapter,
+    private selectYearService: SelectYearService,
     ) {
   }
 
   ngOnInit(): void {
-    this.selectedYear = new Date().getFullYear().toString()
-
+    this.selectYearService.currentYear.subscribe(res => {
+      this.selectedYear = res
+      this.setDriversByYear(this.selectedYear)
+    })
     this.setDriversByYear(this.selectedYear)
-    this.seasonService.getAllSeasons().subscribe(
-      seasonResult => {
-        this.seasons = this.seasonsAdapter.adapt(seasonResult)
-        this.seasonsNumber = this.seasons.length
-        this.page = Math.floor(this.seasonsNumber /10 + 1)
-      }
-    )
   }
 
-  setDriversByYear(year: string){
+  setDriversByYear(year: number){
     this.driversService.getDriversByYear(year).subscribe(
       result => {
         this.drivers = this.driverAdapter.adapt(result)
       }
     )
-  }
-
-  get selectedContent(): Season[] | undefined {
-    return this.seasons?.slice(this.page * 10 - 10, this.page * 10)
-  }
-
-  setSelectedYear(year: number){
-    this.selectedYear = year?.toString()
-    this.setDriversByYear(this.selectedYear)
   }
 
 }

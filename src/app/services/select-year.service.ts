@@ -7,14 +7,13 @@ import { Subject } from 'rxjs';
 export class SelectYearService {
 
 
-  private year = new Subject()
-  currentYear = this.year.asObservable();
+  currentYear: Subject<number>
 
   constructor() {
-
+    this.currentYear = new Subject<number>()
   }
 
-  updateYear(year: string) {
-    this.year.next(year)
+  updateYear(year: number) {
+    return this.currentYear.next(year)
   }
  }

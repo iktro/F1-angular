@@ -18,5 +18,6 @@ export class ChampionshipAdapter implements ModelAdapter<any, Championship[]> {
     }
     return championshipList
   }
+
 }
 

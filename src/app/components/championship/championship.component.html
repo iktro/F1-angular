@@ -1,12 +1,5 @@
-<div class="container text-center mt-1">
-  <button class="btn btn-outline-danger" *ngFor="let championship of selectedContent" (click)="setSelectedYear(championship.year)" clickable>
-    {{championship?.year}}
-  </button>
-
-  <div class="d-flex justify-content-center mt-1">
-    <ngb-pagination [collectionSize]=seasonsNumber [(page)]="page" [boundaryLinks]="true"></ngb-pagination>
-  </div>
-  <h5> Season : {{selectedYear}}</h5>
+<app-select-year></app-select-year>
+<div class="container text-center">
   <input type="checkbox" name="Constructors championship ?" [checked]="isConstructorChampionship"
     (change)="isConstructorChampionship = !isConstructorChampionship; setChampionshipByYear(selectedYear)">
   <label> Constructors championship ? </label>
@@ -34,7 +27,6 @@
 </div>
 
 <div class="container text-center" *ngIf="isConstructorChampionship">
-  <h5> Season : {{selectedYear}}</h5> <input type="checkbox" [checked]="isConstructorChampionship" (change)="isConstructorChampionship = !isConstructorChampionship">
   <table class="table table-striped table-hover col-md-8">
     <tr>
       <th scope="col"> Position </th>

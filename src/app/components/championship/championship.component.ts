@@ -5,6 +5,7 @@ import { Season } from 'src/app/models/season';
 import { SeasonsAdapter } from 'src/app/models/seasons-adapter';
 import { ChampionshipService } from 'src/app/services/championship.service';
 import { SeasonsService } from 'src/app/services/seasons.service';
+import { SelectYearService } from 'src/app/services/select-year.service';
 
 @Component({
   selector: 'app-championship',
@@ -17,29 +18,18 @@ export class ChampionshipComponent implements OnInit {
   driverChampionship?: Championship[]
   isConstructorChampionship: boolean = false
   selectedYear: number = new Date().getFullYear()
-  page = 1
-  seasonsNumber = 0
-  seasons?: Season[]
 
   constructor(
     private championshipService: ChampionshipService, private championshipAdapter: ChampionshipAdapter,
-    private seasonService: SeasonsService, private seasonsAdapter: SeasonsAdapter,
+    private selectYearService: SelectYearService
   ) { }
 
   ngOnInit(): void {
+    this.selectYearService.currentYear.subscribe(res => {
+      this.selectedYear = res
+      this.setChampionshipByYear(this.selectedYear)
+    })
     this.setChampionshipByYear(this.selectedYear)
-    this.seasonService.getAllSeasons().subscribe(
-      seasonResult => {
-        this.seasons = this.seasonsAdapter.adapt(seasonResult)
-        this.seasonsNumber = this.seasons.length
-        this.page = Math.floor(this.seasonsNumber /10 + 1)
-      }
-    )
-
-  }
-
-  get selectedContent(): Season[] | undefined {
-    return this.seasons?.slice(this.page * 10 - 10, this.page * 10)
   }
 
   setChampionshipByYear(year: number){
@@ -56,11 +46,6 @@ export class ChampionshipComponent implements OnInit {
         }
       )
     }
-  }
-
-  setSelectedYear(year: number){
-    this.selectedYear = year
-    this.setChampionshipByYear(year)
   }
 
 }

@@ -10,7 +10,7 @@ export class DriversService {
 
   constructor(private http: HttpClient) { }
 
-  getDriversByYear(year: string) {
+  getDriversByYear(year: number) {
     return this.http.get(this.url +  year + "/2/drivers.json")
   }
 
