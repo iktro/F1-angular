@@ -13,4 +13,8 @@ export class RacesService {
     return this.http.get(this.url + "current/last/results.json")
   }
 
+  getSeasonResults(year: number){
+    return this.http.get(this.url + year + "/results.json?limit=1000")
+  }
+
 }
